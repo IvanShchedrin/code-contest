@@ -2,6 +2,6 @@ import './styles.scss';
 
 import {render} from 'react-dom';
 
-import {CodeMirror} from './components/CodeMirror';
+import {App} from './App';
 
-render(<CodeMirror />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));

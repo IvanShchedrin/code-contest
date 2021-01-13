@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: './src/index.js',
@@ -9,9 +9,16 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/'
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
   optimization: {
-    splitChunks: {chunks: 'all'}
+    // splitChunks: {chunks: 'all'}
   },
   module: {
     rules: [
@@ -32,10 +39,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
     }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: '../stats.html',
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'static',
+    //   openAnalyzer: false,
+    //   reportFilename: '../stats.html',
+    // }),
   ],
 };
