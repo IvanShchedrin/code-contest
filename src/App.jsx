@@ -5,14 +5,14 @@ export const App = () => (
   <Router>
     <Switch>
       <Route path="/home" exact strict>
-        Home
+        Home {'>>'}
         <br />
         <Link to="/editor">Open editor</Link>
       </Route>
       <Route path="/editor" exact strict>
         <Link to="/home">Back</Link>
         <br />
-        Editor
+        {'<<'} Editor
         <CodeMirror />
       </Route>
       <Redirect to="/home" default />
