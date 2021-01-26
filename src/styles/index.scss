@@ -1,0 +1,14 @@
+@use "./node_modules/normalize.css/normalize.css";
+@use "global";
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Roboto, sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

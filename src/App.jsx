@@ -1,21 +1,13 @@
-import {BrowserRouter as Router, Redirect, Switch, Route, Link} from 'react-router-dom';
-import {CodeMirror} from './components/CodeMirror';
+import { BrowserRouter as Router, Redirect, Switch, Route, Link } from 'react-router-dom';
+import { Login } from './screens/Login';
 
 export const App = () => (
   <Router>
     <Switch>
-      <Route path="/home" exact strict>
-        Home {'>>'}
-        <br />
-        <Link to="/editor">Open editor</Link>
+      <Route path="/login" exact strict>
+        <Login />
       </Route>
-      <Route path="/editor" exact strict>
-        <Link to="/home">Back</Link>
-        <br />
-        {'<<'} Editor
-        <CodeMirror />
-      </Route>
-      <Redirect to="/home" default />
+      <Redirect to="/login" default />
     </Switch>
   </Router>
 );

@@ -31,7 +31,14 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: '[folder]_[local]_[hash:base64:3]',
+            },
+          },
+        }, 'sass-loader']
       }
     ],
   },
