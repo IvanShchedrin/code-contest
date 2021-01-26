@@ -1,6 +1,6 @@
-@import '~/src/styles/palette.scss';
+@use "~/src/styles/palette.scss";
 
-.heading {
-  font-size: 30px;
-  color: $blackish;
+.component {
+  text-align: center;
+  color: palette.$white;
 }

@@ -1,11 +1,14 @@
 @use "./node_modules/normalize.css/normalize.css";
 @use "global";
+@use "palette.scss";
 
 * {
   box-sizing: border-box;
 }
+
 body {
   font-family: Roboto, sans-serif;
+  background: palette.$blackish;
 }
 
 img {

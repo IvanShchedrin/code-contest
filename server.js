@@ -1,20 +1,31 @@
+const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
-
 const dev = process.env.NODE_ENV === 'development';
 
+app.use(bodyParser());
+app.use(cookieParser());
+
+app.use('/static', express.static(path.join(__dirname, 'server', 'static')));
+
+require('./server/controllers')(app, io);
+
 if (dev) {
-  require('./utils/devServer')(app);
+  require('./server/devServer')(app);
 }
 
-app.use('/dist', express.static(__dirname + '/dist'))
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/dist/index.html');
-})
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`⚡️⚡️⚡️\nServer started\n- mode: ${dev ? 'development' : 'production'}\n- address: http://localhost:${port}\n⚡️⚡️⚡️`);
 });
