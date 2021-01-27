@@ -6,6 +6,11 @@ module.exports = {
   entry: ['./src/index.js'],
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      store: path.resolve(__dirname, 'src/store/'),
+      containers: path.resolve(__dirname, 'src/containers/'),
+      screens: path.resolve(__dirname, 'src/screens/'),
+    }
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

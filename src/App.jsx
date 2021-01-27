@@ -1,26 +1,24 @@
-import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { useEffect } from 'react';
-import socketIO from 'socket.io-client';
-import { Login } from './screens/Login';
-import { store } from './store';
+import { connect } from 'react-redux';
+import { Login } from 'screens/Login';
+import { WaitingRoom } from 'screens/WaitingRoom';
+import { AdminControls } from 'screens/AdminControls';
+import { WithQuizController } from 'containers/WithQuizController';
+import { selectStep } from 'store/app/selectors';
+import { selectAdmin } from 'store/user/selectors';
 
-export const App = () => {
-  useEffect(() => {
-    const socket = socketIO('http://localhost:3000');
-    console.log(socket);
-  }, []);
-
+export const AppComponent = ({ step, admin }) => {
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/login" exact strict>
-            <Login />
-          </Route>
-          <Redirect to="/login" default />
-        </Switch>
-      </Router>
-    </Provider>
+    <WithQuizController>
+      {step === 'login' && <Login />}
+      {step === 'waiting' && <WaitingRoom />}
+      {admin && <AdminControls />}
+    </WithQuizController>
   );
 };
+
+const mapStateToProps = (state) => ({
+  step: selectStep(state),
+  admin: selectAdmin(state),
+});
+
+export const App = connect(mapStateToProps)(AppComponent);

@@ -5,9 +5,10 @@ class Users {
     this.users = {};
   }
 
-  createUser = ({ name }) => {
+  createUser = ({ name, passPhrase }) => {
     const user = new User({
       name,
+      passPhrase,
       avatarIndex: Object.keys(this.users).length % 18,
     });
     this.users[user.id] = user;
