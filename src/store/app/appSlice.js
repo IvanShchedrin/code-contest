@@ -4,7 +4,10 @@ export const appSlice = createSlice({
   name: 'app',
   initialState: {
     step: 'login',
+    gameStep: null,
     timeout: null,
+    question: null,
+    key: null,
   },
   reducers: {
     setStep: (state, { payload }) => {
@@ -15,10 +18,14 @@ export const appSlice = createSlice({
         state[key] = payload[key];
       });
     },
+    setKey: (state, { payload }) => {
+      state.key = payload;
+      state.gameStep = 'answer';
+    },
   },
 });
 
-export const { setStep, updateApp } = appSlice.actions;
+export const { setStep, updateApp, setKey } = appSlice.actions;
 
 export default appSlice.reducer;
 

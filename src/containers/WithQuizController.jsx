@@ -2,20 +2,18 @@ import { useEffect, useState } from 'react';
 import socketIO from 'socket.io-client';
 import { connect } from 'react-redux';
 import { selectStep } from 'store/app/selectors';
-import { updateApp } from 'store/app/appSlice';
+import { updateApp, setKey } from 'store/app/appSlice';
 
-const WithQuizControllerComponent = ({ step, updateApp, children }) => {
+const WithQuizControllerComponent = ({ step, updateApp, setKey, children }) => {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
     if (step === 'login' || connected) return;
 
-    const socket = socketIO('http://localhost:3000');
+    const socket = socketIO();
 
-    socket.on('set_state', (payload) => {
-      console.log('payload', payload);
-      updateApp(payload);
-    });
+    socket.on('set_state', updateApp);
+    socket.on('answer', setKey);
 
     setConnected(true);
   }, [step, connected]);
@@ -33,6 +31,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   updateApp,
+  setKey,
 };
 
 export const WithQuizController = connect(mapStateToProps, mapDispatchToProps)(WithQuizControllerComponent);

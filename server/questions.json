@@ -1,7 +1,7 @@
 [
   {
     "text": "Кто является автором языка JavaScript?",
-    "timeout": 45,
+    "timeout": 15,
     "key": 1,
     "options": [
       "Джеймс Гослинг",

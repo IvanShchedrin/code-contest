@@ -9,3 +9,8 @@ export const selectStep = createSelector(
   selectApp,
   (app) => app.step,
 );
+
+export const selectGameStep = createSelector(
+  selectApp,
+  (app) => app.gameStep,
+);
