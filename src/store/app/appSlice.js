@@ -23,6 +23,9 @@ export const appSlice = createSlice({
     setKey: (state, { payload }) => {
       state.key = payload;
       state.gameStep = 'answer';
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(200);
+      }
     },
     setUserAnswer: (state, { payload }) => {
       state.userAnswer = payload;

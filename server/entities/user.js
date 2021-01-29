@@ -9,6 +9,7 @@ class User {
   avatar = null
   selectedAnswer = null
   admin = false
+  connected = true
 
   constructor({ name, avatarIndex, passPhrase }) {
     this.id = uuid();
@@ -23,6 +24,10 @@ class User {
 
   setScore = (value) => {
     this.score = value;
+  }
+
+  setConnected = (value) => {
+    this.connected = value;
   }
 }
 

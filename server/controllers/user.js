@@ -16,6 +16,11 @@ module.exports = (app, users) => {
     const { name, passPhrase } = req.body;
     const user = users.createUser({ name, passPhrase });
 
+    if (!user) {
+      res.sendStatus(400);
+      return res.end();
+    }
+
     res.cookie('user_token', user.id, { maxAge: yearMs, httpOnly: true });
     res.end(JSON.stringify(user));
   });

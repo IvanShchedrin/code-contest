@@ -12,6 +12,7 @@ const cx = classnames.bind(styles);
 
 const LoginComponent = ({ initUser, updateApp }) => {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const handleAuth = (resp) => {
     initUser(resp.data);
@@ -32,7 +33,10 @@ const LoginComponent = ({ initUser, updateApp }) => {
       name: event.currentTarget.name.value,
       passPhrase: event.currentTarget.passphrase.value,
     })
-      .then(handleAuth);
+      .then(handleAuth)
+      .catch(() => {
+        setError(true);
+      })
   };
 
   return loading ? (
@@ -50,7 +54,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
         <br />
       </p>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="name" />
+        <input className={cx({ error })} type="text" name="name" placeholder="name" required />
         <input type="text" name="passphrase" placeholder="admin pass phrase" />
         <button type="submit">Поехали!</button>
       </form>

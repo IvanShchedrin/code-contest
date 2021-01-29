@@ -6,12 +6,22 @@ class Users {
   }
 
   createUser = ({ name, passPhrase }) => {
-    const user = new User({
+    const existedUserId = (
+      Object.keys(this.users).find((id) => this.users[id].name === name)
+    );
+    let user = existedUserId ? this.users[existedUserId] : null;
+
+    if (user) {
+      return user.connected ? false : user;
+    }
+
+    user = new User({
       name,
       passPhrase,
       avatarIndex: Object.keys(this.users).length % 18,
     });
     this.users[user.id] = user;
+
     return user;
   }
 

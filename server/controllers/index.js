@@ -8,7 +8,13 @@ module.exports = (app, io) => {
   const quiz = new Quiz(io, users);
 
   app.post('/api/*', (req, res, next) => {
-    req.userData = users.get(req.cookies.user_token);
+    const user = users.get(req.cookies.user_token);
+
+    if (user) {
+      user.setConnected(true);
+    }
+
+    req.userData = user;
     next();
   })
 

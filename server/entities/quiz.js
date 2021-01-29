@@ -8,8 +8,8 @@ class Quiz {
   #questionIndex = -1
   #key = null
   #timeout = null
-  #timeoutId = null;
-  #users = null;
+  #timeoutId = null
+  #users = null
 
   constructor(io, users) {
     this.#users = users;
@@ -25,6 +25,10 @@ class Quiz {
       socket.disconnect(true);
       return;
     }
+
+    socket.on('disconnect', () => {
+      user.setConnected(false);
+    });
 
     this.#sendState({
       results: this.#step === 'results' ? this.#users.getScore() : null,
