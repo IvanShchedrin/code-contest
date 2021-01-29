@@ -8,6 +8,8 @@ export const appSlice = createSlice({
     timeout: null,
     question: null,
     key: null,
+    userAnswer: null,
+    results: null,
   },
   reducers: {
     setStep: (state, { payload }) => {
@@ -22,10 +24,17 @@ export const appSlice = createSlice({
       state.key = payload;
       state.gameStep = 'answer';
     },
+    setUserAnswer: (state, { payload }) => {
+      state.userAnswer = payload;
+    },
+    setResults: (state, { payload }) => {
+      state.results = payload;
+      state.step = 'results';
+    },
   },
 });
 
-export const { setStep, updateApp, setKey } = appSlice.actions;
+export const { setStep, updateApp, setKey, setUserAnswer, setResults } = appSlice.actions;
 
 export default appSlice.reducer;
 

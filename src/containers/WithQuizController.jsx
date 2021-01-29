@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import socketIO from 'socket.io-client';
 import { connect } from 'react-redux';
 import { selectStep } from 'store/app/selectors';
-import { updateApp, setKey } from 'store/app/appSlice';
+import { updateApp, setKey, setResults } from 'store/app/appSlice';
 
-const WithQuizControllerComponent = ({ step, updateApp, setKey, children }) => {
+const WithQuizControllerComponent = ({ step, updateApp, setKey, setResults, children }) => {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ const WithQuizControllerComponent = ({ step, updateApp, setKey, children }) => {
 
     socket.on('set_state', updateApp);
     socket.on('answer', setKey);
+    socket.on('results', setResults);
 
     setConnected(true);
   }, [step, connected]);
@@ -32,6 +33,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   updateApp,
   setKey,
+  setResults,
 };
 
 export const WithQuizController = connect(mapStateToProps, mapDispatchToProps)(WithQuizControllerComponent);

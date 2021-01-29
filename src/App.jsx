@@ -14,7 +14,7 @@ export const AppComponent = ({ step, admin }) => {
       {step === 'login' && <Login />}
       {step === 'waiting' && <WaitingRoom />}
       {step === 'game' && <Game />}
-      {step === 'finish' && <Results />}
+      {step === 'results' && <Results />}
       {admin && <AdminControls />}
     </WithQuizController>
   );

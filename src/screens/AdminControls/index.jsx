@@ -11,6 +11,12 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
   const handleNextQuestion = () => {
     axios.post('/api/admin/next-question');
   };
+  const handleFinishQuestion = () => {
+    axios.post('/api/admin/finish-question');
+  };
+  const handleRestart = () => {
+    axios.post('/api/admin/reset');
+  };
 
   return (
     <>
@@ -27,6 +33,14 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
           Next question
         </button>
       )}
+      {step === 'game' && gameStep === 'question' && (
+        <button type="button" onClick={handleFinishQuestion}>
+          Finish question
+        </button>
+      )}
+      <button type="button" onClick={handleRestart}>
+        Reset
+      </button>
     </>
   );
 }
