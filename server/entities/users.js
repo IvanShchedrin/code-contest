@@ -29,16 +29,25 @@ class Users {
     return this.users[id];
   }
 
-  getScore = () => (
-    Object.keys(this.users)
+  getUsers = () => {
+    return Object.keys(this.users)
+      .map((id) => ({
+        id,
+        name: this.users[id].name,
+        avatar: this.users[id].avatar,
+      }));
+  }
+
+  getScore = () => {
+    return Object.keys(this.users)
       .map((id) => ({
         id,
         name: this.users[id].name,
         score: this.users[id].score,
         avatar: this.users[id].avatar,
       }))
-      .filter((user) => user.score > 0)
-  )
+      .filter((user) => user.score > 0);
+  }
 
   applyAnswers = (key) => {
     for (const id in this.users) {

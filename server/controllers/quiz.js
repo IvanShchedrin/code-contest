@@ -1,4 +1,4 @@
-module.exports = (app, quiz) => {
+module.exports = (app, quiz, questions) => {
   app.post('/api/apply-answer', (req, res) => {
     const { key } = req.body;
     const gameStep = quiz.getGameStep();
@@ -19,9 +19,25 @@ module.exports = (app, quiz) => {
     next();
   })
 
+  app.post('/api/admin/upload-questions', (req, res) => {
+    const { payload } = req.body;
+    const success = questions.load(payload);
+
+    if (!success) {
+      res.sendStatus(401);
+    }
+
+    res.end();
+  });
+
   app.post('/api/admin/start', (req, res) => {
-    quiz.reset();
-    quiz.nextQuestion();
+    if (questions.isLoaded()) {
+      quiz.reset();
+      quiz.nextQuestion();
+    } else {
+      res.sendStatus(401);
+      return res.end();
+    }
     res.end();
   });
 

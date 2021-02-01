@@ -17,12 +17,24 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
   const handleRestart = () => {
     axios.post('/api/admin/reset');
   };
+  const handleQuestionsSubmit = (event) => {
+    event.preventDefault();
+    axios.post('/api/admin/upload-questions', { payload: event.currentTarget.questions.value })
+      .then(() => alert('Success'))
+      .catch(() => alert('Error'));
+  };
 
   return (
     <>
       <p>Game step: {step}</p>
       <p>Question step: {gameStep}</p>
 
+      {step === 'waiting' && (
+        <form onSubmit={handleQuestionsSubmit}>
+          <input type="text" name="questions" autoComplete="off" />
+          <button type="submit">Upload questions</button>
+        </form>
+      )}
       {step === 'waiting' && (
         <button type="button" onClick={handleStart}>
           Start

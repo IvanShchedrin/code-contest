@@ -1,5 +1,4 @@
 const cookieParse = require('cookie').parse;
-const questions = require('../questions.json');
 
 class Quiz {
   #io = null
@@ -10,9 +9,11 @@ class Quiz {
   #timeout = null
   #timeoutId = null
   #users = null
+  #questions = null
 
-  constructor(io, users) {
+  constructor(io, users, questions) {
     this.#users = users;
+    this.#questions = questions;
     this.#io = io;
     io.on('connection', this.#onConnection);
   }
@@ -31,6 +32,7 @@ class Quiz {
     });
 
     this.#sendState({
+      users: this.#step === 'waiting' ? this.#users.getUsers() : null,
       results: this.#step === 'results' ? this.#users.getScore() : null,
     }, socket);
   }
@@ -50,7 +52,7 @@ class Quiz {
   }
 
   #getQuestion() {
-    return questions[this.#questionIndex];
+    return this.#questions.get(this.#questionIndex);
   }
 
   reset = () => {

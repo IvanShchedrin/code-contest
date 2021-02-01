@@ -1,11 +1,13 @@
 const userController = require('./user');
 const quizController = require('./quiz');
 const Quiz = require('../entities/quiz');
-const Users = require('../entities/users.js');
+const Users = require('../entities/users');
+const Questions = require('../entities/questions');
 
 module.exports = (app, io) => {
   const users = new Users();
-  const quiz = new Quiz(io, users);
+  const questions = new Questions();
+  const quiz = new Quiz(io, users, questions);
 
   app.post('/api/*', (req, res, next) => {
     const user = users.get(req.cookies.user_token);
@@ -19,7 +21,7 @@ module.exports = (app, io) => {
   })
 
   userController(app, users);
-  quizController(app, quiz);
+  quizController(app, quiz, questions);
 
   app.post('/api/*', (req, res) => {
     res.sendStatus(404);
