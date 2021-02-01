@@ -31,6 +31,7 @@ class Users {
 
   getUsers = () => {
     return Object.keys(this.users)
+      .filter((id) => this.users[id].connected)
       .map((id) => ({
         id,
         name: this.users[id].name,

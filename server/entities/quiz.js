@@ -32,12 +32,15 @@ class Quiz {
     });
 
     this.#sendState({
-      users: this.#step === 'waiting' ? this.#users.getUsers() : null,
       results: this.#step === 'results' ? this.#users.getScore() : null,
     }, socket);
+
+    if (this.#step === 'waiting') {
+      this.#sendUsers();
+    }
   }
 
-  #sendState = (payload, socket) => {
+  #sendState = (payload = {}, socket) => {
     const currentQuestion = this.#getQuestion();
     const { key, ...question } = currentQuestion || {};
 
@@ -48,6 +51,12 @@ class Quiz {
       question: currentQuestion ? question : null,
       key: this.#key,
       ...payload,
+    });
+  }
+
+  #sendUsers = () => {
+    this.#io.emit('set_state', {
+      users: this.#users.getUsers(),
     });
   }
 
