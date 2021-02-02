@@ -8,6 +8,12 @@ import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
 import { selectUser } from 'store/user/selectors';
 
+// Img
+import PixelBlock from '../../../server/static/media/pixel-block.svg';
+
+// Styles
+import styles from './styles.scss';
+
 const LoginComponent = ({ initUser, updateApp }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -43,7 +49,8 @@ const LoginComponent = ({ initUser, updateApp }) => {
       Loading...
     </>
   ) : (
-    <>
+    <div className={styles.component}>
+      <img src={PixelBlock} alt=""/>
       <h1>Привет и&nbsp;добро&nbsp;пожаловать на&nbsp;frontend&nbsp;quiz!</h1>
       <h3 style={{ marginBottom: '32px' }}>Пройди короткую авторизацию и присоединяйся, будет интересно 😉</h3>
       <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
@@ -58,7 +65,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
       {!showPassPhrase && (
         <Button onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
       )}
-    </>
+    </div>
   );
 }
 
