@@ -10,6 +10,7 @@ module.exports = {
       store: path.resolve(__dirname, 'src/store/'),
       containers: path.resolve(__dirname, 'src/containers/'),
       screens: path.resolve(__dirname, 'src/screens/'),
+      components: path.resolve(__dirname, 'src/components/'),
     }
   },
   output: {

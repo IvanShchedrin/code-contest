@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import confetti from 'canvas-confetti';
 
+import { Timer } from 'components/Timer';
+
 import { setUserAnswer } from 'store/app/appSlice';
 import { selectGameStep, selectQuestion, selectUserAnswer, selectKey, selectTimeout } from 'store/app/selectors';
 
@@ -35,7 +37,10 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
 
   return (
     <>
-      timeout: {timeout}
+      {gameStep === 'question' && timeout && (
+        <Timer timeout={timeout} />
+      )}
+
       {question && (
         <>
           <p dangerouslySetInnerHTML={{ __html: question.text }} />

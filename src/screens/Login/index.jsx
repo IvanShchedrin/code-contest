@@ -48,7 +48,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
       <h3 style={{ marginBottom: '32px' }}>Пройди короткую авторизацию и присоединяйся, будет интересно 😉</h3>
       <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
         <Space>
-          <Input style={{ background: error && 'red' }} type="text" name="name" placeholder="Имя" required />
+          <Input style={{ background: error && 'red' }} type="text" name="name" placeholder="Имя" maxLength="20" required />
           {showPassPhrase && (
             <Input type="text" name="passphrase" placeholder="Passphrase" />
           )}
