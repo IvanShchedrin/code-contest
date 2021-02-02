@@ -20,6 +20,11 @@ export const selectQuestion = createSelector(
   (app) => app.question,
 );
 
+export const selectTimeout = createSelector(
+  selectApp,
+  (app) => app.timeout,
+);
+
 export const selectUserAnswer = createSelector(
   selectApp,
   (app) => app.userAnswer,
@@ -33,4 +38,9 @@ export const selectKey = createSelector(
 export const selectResults = createSelector(
   selectApp,
   (app) => app.results,
+);
+
+export const selectUsers = createSelector(
+  selectApp,
+  (app) => app.users,
 );

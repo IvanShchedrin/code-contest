@@ -3,12 +3,16 @@ import { selectResults } from 'store/app/selectors';
 
 export const ResultsComponent = ({ results }) => (
   <>
-    Results:
-    <pre>
-      <code>
-        {JSON.stringify(results, 0, 2)}
-      </code>
-    </pre>
+    Результаты:
+    {results && results.map((user) => (
+      <div key={user.id}>
+        <img src={user.avatar} alt="" />
+        {' '}
+        {user.name}
+        {' '}
+        {user.score}
+      </div>
+    ))}
   </>
 );
 

@@ -25,10 +25,7 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
   };
 
   return (
-    <>
-      <p>Game step: {step}</p>
-      <p>Question step: {gameStep}</p>
-
+    <div style={{ marginTop: '32px' }}>
       {step === 'waiting' && (
         <form onSubmit={handleQuestionsSubmit}>
           <input type="text" name="questions" autoComplete="off" />
@@ -53,7 +50,7 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
       <button type="button" onClick={handleRestart}>
         Reset
       </button>
-    </>
+    </div>
   );
 }
 

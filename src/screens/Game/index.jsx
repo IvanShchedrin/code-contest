@@ -1,12 +1,13 @@
-import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { setUserAnswer } from 'store/app/appSlice';
-import { selectGameStep, selectQuestion, selectUserAnswer, selectKey } from 'store/app/selectors';
+import { selectGameStep, selectQuestion, selectUserAnswer, selectKey, selectTimeout } from 'store/app/selectors';
 
-export const GameComponent = ({ gameStep, question, userAnswer, answerKey, setUserAnswer }) => {
+export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerKey, setUserAnswer }) => {
   const handleAnswerSelect = (index) => {
+    if (gameStep !== 'question') return;
+
     axios.post('/api/apply-answer', { key: index })
       .then(() => {
         setUserAnswer(index);
@@ -15,20 +16,13 @@ export const GameComponent = ({ gameStep, question, userAnswer, answerKey, setUs
 
   return (
     <>
-      <p>Game step: {gameStep}</p>
-      <p>User answer: {userAnswer}</p>
-      <p>Key: {answerKey}</p>
-      {typeof answerKey === 'number' && question && (
-        <p>
-          Answer: {question.options[answerKey]}
-        </p>
-      )}
+      timeout: {timeout}
       {question && (
         <>
           <p dangerouslySetInnerHTML={{ __html: question.text }} />
           {question.options.map((text, index) => (
             <button
-              style={{ background: index === userAnswer ? 'green' : 'gray' }}
+              style={{ background: index === userAnswer ? '#93caff' : '#e5e5e5' }}
               onClick={() => handleAnswerSelect(index)}
               key={text}
             >
@@ -47,6 +41,7 @@ const mapStateToProps = (state) => ({
   question: selectQuestion(state),
   userAnswer: selectUserAnswer(state),
   answerKey: selectKey(state),
+  timeout: selectTimeout(state),
 });
 
 const mapDispatchToProps = {

@@ -30,7 +30,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
 
     axios.post('/api/signup', {
       name: event.currentTarget.name.value,
-      passPhrase: event.currentTarget.passphrase.value,
+      passPhrase: event.currentTarget.passphrase?.value,
     })
       .then(handleAuth)
       .catch(() => {
@@ -52,7 +52,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
           {showPassPhrase && (
             <Input type="text" name="passphrase" placeholder="Passphrase" />
           )}
-          <Button type="primary">Поехали!</Button>
+          <Button type="primary" htmlType="submit">Поехали!</Button>
         </Space>
       </form>
       {!showPassPhrase && (

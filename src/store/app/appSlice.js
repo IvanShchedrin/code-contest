@@ -9,6 +9,7 @@ export const appSlice = createSlice({
     question: null,
     key: null,
     userAnswer: null,
+    users: null,
     results: null,
   },
   reducers: {
