@@ -41,6 +41,7 @@ module.exports = {
         use: ['style-loader', {
           loader: 'css-loader',
           options: {
+            url: false,
             modules: {
               localIdentName: '[folder]_[local]_[hash:base64:3]',
             },
