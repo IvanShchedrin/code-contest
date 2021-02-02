@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import classnames from 'classnames/bind';
 
 import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
 import { selectUser } from 'store/user/selectors';
-
-import styles from './styles.scss';
-const cx = classnames.bind(styles);
 
 const LoginComponent = ({ initUser, updateApp }) => {
   const [loading, setLoading] = useState(true);
@@ -44,8 +40,8 @@ const LoginComponent = ({ initUser, updateApp }) => {
       Loading...
     </>
   ) : (
-    <div className={cx('component', 'page-pad')}>
-      <p className={styles.text}>
+    <>
+      <p>
         Привет и добро пожаловать на frontend quiz!
         <br />
         <br />
@@ -54,11 +50,11 @@ const LoginComponent = ({ initUser, updateApp }) => {
         <br />
       </p>
       <form onSubmit={handleSubmit}>
-        <input className={cx({ error })} type="text" name="name" placeholder="name" required />
+        <input style={{ background: error && 'red' }} type="text" name="name" placeholder="name" required />
         <input type="text" name="passphrase" placeholder="admin pass phrase" />
         <button type="submit">Поехали!</button>
       </form>
-    </div>
+    </>
   );
 }
 
