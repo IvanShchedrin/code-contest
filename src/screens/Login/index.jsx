@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import { Space, Input, Button } from 'antd';
+
 import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
 import { selectUser } from 'store/user/selectors';
@@ -9,6 +11,7 @@ import { selectUser } from 'store/user/selectors';
 const LoginComponent = ({ initUser, updateApp }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showPassPhrase, setShowPassPhrase] = useState(false);
 
   const handleAuth = (resp) => {
     initUser(resp.data);
@@ -41,19 +44,20 @@ const LoginComponent = ({ initUser, updateApp }) => {
     </>
   ) : (
     <>
-      <p>
-        Привет и добро пожаловать на frontend quiz!
-        <br />
-        <br />
-        Пройди короткую авторизацию и присоединяйся, будет интересно 😉
-        <br />
-        <br />
-      </p>
-      <form onSubmit={handleSubmit}>
-        <input style={{ background: error && 'red' }} type="text" name="name" placeholder="name" required />
-        <input type="text" name="passphrase" placeholder="admin pass phrase" />
-        <button type="submit">Поехали!</button>
+      <h1>Привет и&nbsp;добро&nbsp;пожаловать на&nbsp;frontend&nbsp;quiz!</h1>
+      <h3 style={{ marginBottom: '32px' }}>Пройди короткую авторизацию и присоединяйся, будет интересно 😉</h3>
+      <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
+        <Space>
+          <Input style={{ background: error && 'red' }} type="text" name="name" placeholder="Имя" required />
+          {showPassPhrase && (
+            <Input type="text" name="passphrase" placeholder="Passphrase" />
+          )}
+          <Button type="primary">Поехали!</Button>
+        </Space>
       </form>
+      {!showPassPhrase && (
+        <Button onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
+      )}
     </>
   );
 }
