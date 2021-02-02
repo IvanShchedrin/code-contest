@@ -2,14 +2,11 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { Space, Input, Button } from 'antd';
+import { Space, Button } from 'antd';
 
 import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
 import { selectUser } from 'store/user/selectors';
-
-// Img
-import PixelBlock from '../../../server/static/media/pixel-block.svg';
 
 // Styles
 import styles from './styles.scss';
@@ -49,22 +46,42 @@ const LoginComponent = ({ initUser, updateApp }) => {
       Loading...
     </>
   ) : (
-    <div className={styles.component}>
-      <img src={PixelBlock} alt=""/>
-      <h1>Привет и&nbsp;добро&nbsp;пожаловать на&nbsp;frontend&nbsp;quiz!</h1>
-      <h3 style={{ marginBottom: '32px' }}>Пройди короткую авторизацию и присоединяйся, будет интересно 😉</h3>
-      <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
-        <Space>
-          <Input style={{ background: error && 'red' }} type="text" name="name" placeholder="Имя" maxLength="20" required />
-          {showPassPhrase && (
-            <Input type="text" name="passphrase" placeholder="Passphrase" />
-          )}
-          <Button type="primary" htmlType="submit">Поехали!</Button>
-        </Space>
-      </form>
+    <div className={styles.login}>
+      <h1 className={styles.login__title}>Frontend quiz!</h1>
+      <h3 className={styles.login__subtitle}>Пройди короткую авторизацию и присоединяйся.<br />Будет интересно 😉</h3>
+      <div className={styles.login__wrap}>
+        <form style={{ marginBottom: '8px' }} className={styles.login__form} onSubmit={handleSubmit}>
+          <div className={styles.container}>
+            <label for="name" className={styles.login__label}>
+              Name
+            </label>
+            <input style={{ background: error && 'red' }}
+                   className={styles.login__input}
+                   type="text"
+                   name="name"
+                   maxLength="20"
+                   required id="name"
+            />
+            {showPassPhrase && (
+                <>
+                  <label for="passphrase" className={styles.login__label}>
+                    Passphrase
+                  </label>
+                  <input
+                      className={styles.login__input}
+                      type="text"
+                      name="passphrase"
+                      id="passphrase"
+                  />
+                </>
+            )}
+            <Button className={styles.login__button} htmlType="submit">Поехали!</Button>
+          </div>
+        </form>
       {!showPassPhrase && (
-        <Button onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
+        <Button className={[styles.login__label, styles.login__admin]} onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
       )}
+      </div>
     </div>
   );
 }

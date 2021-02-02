@@ -1,5 +1,103 @@
 @import '~antd/dist/antd.css';
+@import "../../styles/fonts.scss";
 
-.component {
-  background: red;
+.login {
+  height: 100%;
+  padding: 30% 5% 0;
+  background-image: url("static/media/pixel-block.svg");
+  background-repeat: no-repeat;
+  background-size: inherit;
+  background-position-y: bottom;
+
+  @media (min-width: 769px) {
+    padding: 10% 0 0;
+    background-size: contain;
+  }
+}
+
+.login__title {
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 40px;
+  text-align: center;
+
+  @media (min-width: 769px) {
+    font-weight: 800;
+    font-size: 62px;
+    line-height: 60px;
+  }
+}
+
+.login__subtitle {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.login__wrap {
+  background-color: #111215;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 15.6457px 31.2913px rgba(35, 23, 5, 0.26);
+}
+
+.login__label {
+  color: rgba(255, 255, 255, 0.64);
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.login__button {
+  border: 2px solid transparent;
+  padding: 0 10px;
+  background: none;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.64);
+
+  &:hover {
+    background: none;
+    color: rgba(255, 255, 255, 0.64);
+    border: 2px solid #27EE53;
+  }
+}
+
+.login__input {
+  padding: 5px;
+  margin: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 3px solid #000000;
+  border-radius: 8.61px;
+  outline: none;
+  color: #fff;
+  transition-duration: 0.5s;
+
+  &:hover {
+    border: 3px solid #27EE53;
+    transition-duration: 0.5s;
+    background: none;
+  }
+
+  &:active {
+    border: 3px solid #27EE53;
+    color: #fff;
+    background: none;
+  }
+
+  &:focus {
+    transition: color 5000s, background-color 5000s ease-in-out 0s;
+  }
+}
+
+.login__admin {
+  padding: 0;
+
+   &:hover {
+     background: none;
+     border: none;
+     color: #27EE53;
+   }
 }
