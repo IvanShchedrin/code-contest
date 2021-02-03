@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import { selectStep, selectGameStep } from 'store/app/selectors';
 
+// Styles
+import styles from './styles.scss';
+
 export const AdminControlsComponent = ({ step, gameStep }) => {
   const handleStart = () => {
     axios.post('/api/admin/start');
@@ -25,31 +28,34 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
   };
 
   return (
-    <div style={{ marginTop: '32px' }}>
-      {step === 'waiting' && (
-        <form onSubmit={handleQuestionsSubmit}>
-          <input type="text" name="questions" autoComplete="off" />
-          <button type="submit">Upload questions</button>
-        </form>
-      )}
-      {step === 'waiting' && (
-        <button type="button" onClick={handleStart}>
-          Start
+    <div className={styles.components}>
+      <p className={styles.adminText}>Admin panel below</p>
+      <div className={styles.wrap}>
+        {step === 'waiting' && (
+            <form onSubmit={handleQuestionsSubmit} className={styles.form}>
+              <input type="text" name="questions" autoComplete="off" className={styles.input} />
+              <button type="submit" className={styles.button}>Upload questions</button>
+            </form>
+        )}
+        {step === 'waiting' && (
+            <button type="button" onClick={handleStart} className={styles.button}>
+              Start
+            </button>
+        )}
+        {step === 'game' && (
+            <button type="button" onClick={handleNextQuestion} className={styles.button}>
+              Next question
+            </button>
+        )}
+        {step === 'game' && gameStep === 'question' && (
+            <button type="button" onClick={handleFinishQuestion} className={styles.button}>
+              Finish question
+            </button>
+        )}
+        <button type="button" onClick={handleRestart} className={styles.button}>
+          Reset
         </button>
-      )}
-      {step === 'game' && (
-        <button type="button" onClick={handleNextQuestion}>
-          Next question
-        </button>
-      )}
-      {step === 'game' && gameStep === 'question' && (
-        <button type="button" onClick={handleFinishQuestion}>
-          Finish question
-        </button>
-      )}
-      <button type="button" onClick={handleRestart}>
-        Reset
-      </button>
+      </div>
     </div>
   );
 }

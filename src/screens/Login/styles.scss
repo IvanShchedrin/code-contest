@@ -55,11 +55,12 @@
 
 .button {
   border: 2px solid rgba(255, 255, 255, 0.2);
-  padding: 0 10px;
+  padding: 0 13px;
   margin-top: 10px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 8px;
   color: rgba(255, 255, 255, 0.64);
+  cursor: pointer;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);

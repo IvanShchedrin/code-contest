@@ -1,0 +1,73 @@
+.components {
+  padding: 5%;
+  background: rgba(17, 18, 21, .9);
+  background-size: 15%;
+  position: relative;
+}
+
+.adminText {
+  position: absolute;
+  color: #E5E5E5;
+  font-size: 22px;
+  font-weight: 400;
+  top: -40px;
+
+  @media (min-width: 769px) {
+    top: -55px;
+    font-size: 30px;
+  }
+}
+
+.wrap {
+  background-color: #111215;
+  max-width: 470px;
+  padding: 30px ;
+  border-radius: 18px;
+  box-shadow: 0 15.6457px 31.2913px rgba(35, 23, 5, 0.26);
+}
+
+.button {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 0 13px;
+  margin: 10px;
+  margin-left: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.64);
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.64);
+    border: 2px solid #27EE53;
+  }
+}
+
+.input {
+  padding: 5px;
+  margin: 10px;
+  margin-left: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  color: #fff;
+  transition-duration: 0.5s;
+
+  &:hover {
+    border: 3px solid #27EE53;
+    transition-duration: 0.5s;
+    background: none;
+  }
+
+  &:active {
+    border: 3px solid #27EE53;
+    color: #fff;
+    background: none;
+  }
+
+  &:focus {
+    transition: color 5000s, background-color 5000s ease-in-out 0s;
+  }
+}

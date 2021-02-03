@@ -1,0 +1,82 @@
+.components {
+  height: 100%;
+  padding: 5%;
+  background: rgba(17, 18, 21, 0.9) url(static/media/batman.png) no-repeat -20% 95%;
+  background-size: 45%;
+  position: relative;
+
+  @media (min-width: 769px) {
+    background: rgba(17, 18, 21, .9) url(static/media/batman.png) no-repeat 0 5%;
+    background-size: 20%;
+  }
+}
+
+.questionText {
+  margin: 0 auto 25px;
+  color: #e5e5e5;
+  font-size: 22px;
+  line-height: 29px;
+  font-weight: 400;
+  text-align: center;
+
+  code {
+    text-align: start;
+    display: inline-block;
+    font-size: 14px;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 3px;
+    line-height: 15px;
+    margin: 10px;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 30px;
+    width: 400px;
+  }
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  border: 2px solid transparent;
+  width: 300px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: none;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.64);
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.64);
+    border: 2px solid #27EE53;
+  }
+}
+
+.image {
+  position: absolute;
+  bottom: -20px;
+  right: -90px;
+  background: url(static/media/superman.png) no-repeat;
+  background-size: 100%;
+  width: 200px;
+  height: 200px;
+  z-index: 0;
+  transform: scale(-1, 1);
+
+  @media (min-width: 769px) {
+    top: 0;
+    right: -30px;
+    background-size: 100%;
+    width: 300px;
+    height: 300px;
+  }
+}

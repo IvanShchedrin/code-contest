@@ -1,0 +1,12 @@
+.timer {
+  background: rgba(17, 18, 21, 0.9);
+  color: #e5e5e5;
+  font-size: 20px;
+  padding: 0 40px;
+  text-align: right;
+
+  @media (min-width: 769px) {
+    font-size: 30px;
+    padding: 10px 40px;
+  }
+}

@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
+// Styles
+import styles from './styles.scss';
+
 export const Timer = ({ timeout }) => {
   const timeoutRef = useRef(null);
   const intervalRef = useRef(null);
@@ -52,9 +55,9 @@ export const Timer = ({ timeout }) => {
   const seconds = currentTimeout - minutes * 60;
 
   return (
-    <span>
+    <div className={styles.timer}>
       {minutes || ''}{minutes ? '' : ''}
       {seconds > 9 ? '' : '0'}{seconds}
-    </span>
+    </div>
   );
 }

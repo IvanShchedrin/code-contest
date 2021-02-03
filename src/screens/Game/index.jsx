@@ -8,6 +8,9 @@ import { Timer } from 'components/Timer';
 import { setUserAnswer } from 'store/app/appSlice';
 import { selectGameStep, selectQuestion, selectUserAnswer, selectKey, selectTimeout } from 'store/app/selectors';
 
+// Styles
+import styles from './styles.scss';
+
 export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerKey, setUserAnswer }) => {
   const handleAnswerSelect = (index) => {
     if (gameStep !== 'question') return;
@@ -42,19 +45,23 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
       )}
 
       {question && (
-        <>
-          <p dangerouslySetInnerHTML={{ __html: question.text }} />
-          {question.options.map((text, index) => (
-            <button
-              style={{ background: index === userAnswer ? '#93caff' : '#e5e5e5' }}
-              onClick={() => handleAnswerSelect(index)}
-              key={text}
-            >
-              {index === answerKey ? '✅ ' : ' '}
-              <span dangerouslySetInnerHTML={{ __html: text }} />
-            </button>
-          ))}
-        </>
+        <div className={styles.components}>
+          <p dangerouslySetInnerHTML={{ __html: question.text }} className={styles.questionText}/>
+          <div className={styles.wrap}>
+            {question.options.map((text, index) => (
+                <button
+                    style={{ background: index === userAnswer ? '#27EE53' : 'rgba(255, 255, 255, 0.2)' }}
+                    onClick={() => handleAnswerSelect(index)}
+                    key={text}
+                    className={styles.button}
+                >
+                  {index === answerKey ? '✅ ' : ' '}
+                  <span dangerouslySetInnerHTML={{ __html: text }} />
+                </button>
+            ))}
+          </div>
+          <div className={styles.image} />
+        </div>
       )}
     </>
   );
