@@ -1,16 +1,16 @@
 .component {
   padding: 20px;
   min-height: 100vh;
+
+  code {
+    white-space: nowrap;
+  }
 }
 
 .question {
   overflow: auto;
   margin: 0 -20px 20px;
   padding: 0 20px 20px;
-
-  code {
-    white-space: nowrap;
-  }
 }
 
 .answer {
@@ -24,4 +24,5 @@
   margin-bottom: 20px;
   overflow: auto;
   outline: none;
+  white-space: nowrap;
 }

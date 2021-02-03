@@ -60,7 +60,7 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
               key={text}
             >
               {index === answerKey ? '✅ ' : ' '}
-              <span dangerouslySetInnerHTML={{ __html: text }} />
+              <code dangerouslySetInnerHTML={{ __html: text }} />
             </button>
           ))}
         </>
