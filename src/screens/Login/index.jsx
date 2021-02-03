@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { Space, Button } from 'antd';
+import { Button } from 'antd';
 
 import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
@@ -47,39 +47,41 @@ const LoginComponent = ({ initUser, updateApp }) => {
     </>
   ) : (
     <div className={styles.login}>
-      <h1 className={styles.login__title}>Frontend quiz!</h1>
-      <h3 className={styles.login__subtitle}>Пройди короткую авторизацию и присоединяйся.<br />Будет интересно 😉</h3>
-      <div className={styles.login__wrap}>
-        <form style={{ marginBottom: '8px' }} className={styles.login__form} onSubmit={handleSubmit}>
+      <h1 className={styles.title}>Frontend quiz!</h1>
+      <h3 className={styles.subtitle}>Пройди короткую авторизацию и присоединяйся.<br />Будет интересно 😉</h3>
+      <div className={styles.wrap}>
+        <form style={{ marginBottom: '8px' }} className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.container}>
-            <label for="name" className={styles.login__label}>
-              Name
-            </label>
-            <input style={{ background: error && 'red' }}
-                   className={styles.login__input}
-                   type="text"
-                   name="name"
-                   maxLength="20"
-                   required id="name"
-            />
+            <div className={styles.inputWrap}>
+              <label htmlFor="name" className={styles.label}>
+                Name
+              </label>
+              <input style={{background: error && 'red'}}
+                     className={styles.input}
+                     type="text"
+                     name="name"
+                     maxLength="20"
+                     required id="name"
+              />
+            </div>
             {showPassPhrase && (
-                <>
-                  <label for="passphrase" className={styles.login__label}>
+                <div className={styles.inputWrap}>
+                  <label for="passphrase" className={styles.label}>
                     Passphrase
                   </label>
                   <input
-                      className={styles.login__input}
+                      className={styles.input}
                       type="text"
                       name="passphrase"
                       id="passphrase"
                   />
-                </>
+                </div>
             )}
-            <Button className={styles.login__button} htmlType="submit">Поехали!</Button>
+            <Button className={styles.button} htmlType="submit">Поехали!</Button>
           </div>
         </form>
       {!showPassPhrase && (
-        <Button className={[styles.login__label, styles.login__admin]} onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
+        <Button className={[styles.label, styles.admin]} onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
       )}
       </div>
     </div>

@@ -3,7 +3,7 @@
 
 .login {
   height: 100%;
-  padding: 30% 5% 0;
+  padding: 20% 5% 0;
   background-image: url("static/media/pixel-block.svg");
   background-repeat: no-repeat;
   background-size: inherit;
@@ -15,7 +15,7 @@
   }
 }
 
-.login__title {
+.title {
   font-weight: 600;
   font-size: 42px;
   line-height: 40px;
@@ -28,49 +28,58 @@
   }
 }
 
-.login__subtitle {
+.subtitle {
   text-align: center;
   font-weight: 300;
   margin-bottom: 15px;
 }
 
-.login__wrap {
+.wrap {
   background-color: #111215;
-  max-width: 600px;
+  max-width: 470px;
   margin: 30px auto;
   padding: 30px;
   border-radius: 18px;
   box-shadow: 0 15.6457px 31.2913px rgba(35, 23, 5, 0.26);
 }
 
-.login__label {
+.label {
   color: rgba(255, 255, 255, 0.64);
+  width: 70px;
   background: none;
+  padding: 0;
   border: none;
   font-weight: 500;
   font-size: 11px;
 }
 
-.login__button {
-  border: 2px solid transparent;
+.button {
+  border: 2px solid rgba(255, 255, 255, 0.2);
   padding: 0 10px;
-  background: none;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.64);
 
   &:hover {
-    background: none;
+    background: rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.64);
     border: 2px solid #27EE53;
   }
 }
 
-.login__input {
+.inputWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
   padding: 5px;
   margin: 10px;
+  margin-left: 0;
   background: rgba(255, 255, 255, 0.05);
-  border: 3px solid #000000;
-  border-radius: 8.61px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   outline: none;
   color: #fff;
   transition-duration: 0.5s;
@@ -92,12 +101,14 @@
   }
 }
 
-.login__admin {
+.admin {
   padding: 0;
+  background: none;
 
-   &:hover {
-     background: none;
-     border: none;
-     color: #27EE53;
-   }
+  &:hover {
+    background: none;
+    color: #27EE53;
+    border: none;
+    text-decoration: underline;
+  }
 }
