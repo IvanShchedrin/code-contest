@@ -1,5 +1,11 @@
 @import '~antd/dist/antd.css';
 
+:global {
+  body {
+    background: #E5E5E5;
+  }
+}
+
 .app {
   background: #E5E5E5;
   height: 100vh;

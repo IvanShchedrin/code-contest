@@ -1,0 +1,27 @@
+.component {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.question {
+  overflow: auto;
+  margin: 0 -20px 20px;
+  padding: 0 20px 20px;
+
+  code {
+    white-space: nowrap;
+  }
+}
+
+.answer {
+  display: block;
+  background: transparent;
+  padding: 12px;
+  width: 100%;
+  text-align: left;
+  border-radius: 20px;
+  border: 2px solid #27EE53;
+  margin-bottom: 20px;
+  overflow: auto;
+  outline: none;
+}

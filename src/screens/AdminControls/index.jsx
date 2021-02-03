@@ -25,7 +25,7 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
   };
 
   return (
-    <div style={{ marginTop: '32px' }}>
+    <div style={{ position: 'fixed', bottom: 0 }}>
       {step === 'waiting' && (
         <form onSubmit={handleQuestionsSubmit}>
           <input type="text" name="questions" autoComplete="off" />

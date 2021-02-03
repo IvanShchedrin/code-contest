@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import confetti from 'canvas-confetti';
+import styles from './styles.scss';
 
 import { Timer } from 'components/Timer';
 
@@ -36,17 +37,25 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
   }, [userAnswer, answerKey]);
 
   return (
-    <>
+    <div className={styles.component}>
       {gameStep === 'question' && timeout && (
         <Timer timeout={timeout} />
       )}
-
+      <br />
+      <br />
       {question && (
         <>
-          <p dangerouslySetInnerHTML={{ __html: question.text }} />
+          <div
+            className={styles.question}
+            dangerouslySetInnerHTML={{ __html: question.text }}
+          />
           {question.options.map((text, index) => (
             <button
-              style={{ background: index === userAnswer ? '#93caff' : '#e5e5e5' }}
+              className={styles.answer}
+              style={{
+                borderColor: index === userAnswer ? '#27ee53' : '#a8a8a8',
+                pointerEvents: gameStep === 'answer' ? 'none' : 'all',
+              }}
               onClick={() => handleAnswerSelect(index)}
               key={text}
             >
@@ -56,7 +65,7 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
           ))}
         </>
       )}
-    </>
+    </div>
   );
 };
 
