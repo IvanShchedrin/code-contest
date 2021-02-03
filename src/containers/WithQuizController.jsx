@@ -19,6 +19,10 @@ const WithQuizControllerComponent = ({ step, updateApp, setKey, setResults, chil
     setConnected(true);
   }, [step, connected]);
 
+  useEffect(() => {
+    document.body.className = step;
+  }, [step])
+
   return (
     <>
       {children}

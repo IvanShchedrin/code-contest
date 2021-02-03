@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-
-import styles from './styles.scss';
+import './styles.scss';
 
 import { Login } from 'screens/Login';
 import { WaitingRoom } from 'screens/WaitingRoom';
@@ -14,15 +13,13 @@ import { selectAdmin } from 'store/user/selectors';
 
 export const AppComponent = ({ step, admin }) => {
   return (
-    <div className={styles.app}>
-      <WithQuizController>
-        {step === 'login' && <Login />}
-        {step === 'waiting' && <WaitingRoom />}
-        {step === 'game' && <Game />}
-        {step === 'results' && <Results />}
-        {admin && <AdminControls />}
-      </WithQuizController>
-    </div>
+    <WithQuizController>
+      {step === 'login' && <Login />}
+      {step === 'waiting' && <WaitingRoom />}
+      {step === 'game' && <Game />}
+      {step === 'results' && <Results />}
+      {admin && <AdminControls />}
+    </WithQuizController>
   );
 };
 

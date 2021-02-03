@@ -1,60 +1,26 @@
-@import '~antd/dist/antd.css';
-@import "../../styles/fonts.scss";
-
-.login {
-  padding: 20% 5% 0;
-
-  @media (min-width: 769px) {
-    padding: 10% 0 0;
-    background-size: contain;
-  }
-}
-
-.title {
-  font-weight: 600;
-  font-size: 42px;
-  line-height: 40px;
-  text-align: center;
-
-  @media (min-width: 769px) {
-    font-weight: 800;
-    font-size: 62px;
-    line-height: 60px;
-  }
-}
-
-.subtitle {
-  text-align: center;
-  font-weight: 300;
-  margin-bottom: 15px;
+.components {
+  padding: 5%;
+  background-size: 15%;
+  position: relative;
 }
 
 .wrap {
   background-color: #111215;
   max-width: 470px;
-  margin: 30px auto;
-  padding: 30px;
+  padding: 30px ;
   border-radius: 18px;
   box-shadow: 0 15.6457px 31.2913px rgba(35, 23, 5, 0.26);
-}
-
-.label {
-  color: rgba(255, 255, 255, 0.64);
-  width: 70px;
-  background: none;
-  padding: 0;
-  border: none;
-  font-weight: 500;
-  font-size: 11px;
 }
 
 .button {
   border: 2px solid rgba(255, 255, 255, 0.2);
   padding: 0 13px;
-  margin-top: 10px;
+  margin: 10px;
+  margin-left: 0;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.64);
+  outline: none;
   cursor: pointer;
 
   &:hover {
@@ -62,11 +28,6 @@
     color: rgba(255, 255, 255, 0.64);
     border: 2px solid #27EE53;
   }
-}
-
-.inputWrap {
-  display: flex;
-  flex-direction: column;
 }
 
 .input {
@@ -94,17 +55,5 @@
 
   &:focus {
     transition: color 5000s, background-color 5000s ease-in-out 0s;
-  }
-}
-
-.admin {
-  padding: 0;
-  background: none;
-
-  &:hover {
-    background: none;
-    color: #27EE53;
-    border: none;
-    text-decoration: underline;
   }
 }

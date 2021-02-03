@@ -1,13 +1,17 @@
 import { useEffect } from 'react';
+import classnames from 'classnames/bind';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import confetti from 'canvas-confetti';
-import styles from './styles.scss';
 
 import { Timer } from 'components/Timer';
 
 import { setUserAnswer } from 'store/app/appSlice';
 import { selectGameStep, selectQuestion, selectUserAnswer, selectKey, selectTimeout } from 'store/app/selectors';
+
+// Styles
+import styles from './styles.scss';
+const cx = classnames.bind(styles);
 
 export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerKey, setUserAnswer }) => {
   const handleAnswerSelect = (index) => {
@@ -37,35 +41,32 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
   }, [userAnswer, answerKey]);
 
   return (
-    <div className={styles.component}>
+    <>
       {gameStep === 'question' && timeout && (
         <Timer timeout={timeout} />
       )}
-      <br />
-      <br />
+
       {question && (
-        <>
-          <div
-            className={styles.question}
-            dangerouslySetInnerHTML={{ __html: question.text }}
-          />
-          {question.options.map((text, index) => (
-            <button
-              className={styles.answer}
-              style={{
-                borderColor: index === userAnswer ? '#27ee53' : '#a8a8a8',
-                pointerEvents: gameStep === 'answer' ? 'none' : 'all',
-              }}
-              onClick={() => handleAnswerSelect(index)}
-              key={text}
-            >
-              {index === answerKey ? '✅ ' : ' '}
-              <code dangerouslySetInnerHTML={{ __html: text }} />
-            </button>
-          ))}
-        </>
+        <div className={styles.components}>
+          <p dangerouslySetInnerHTML={{ __html: question.text }} className={styles.questionText}/>
+          <div className={styles.wrap}>
+            {question.options.map((text, index) => (
+              <button
+                onClick={() => handleAnswerSelect(index)}
+                key={text}
+                className={cx('button', {
+                  selected: gameStep === 'question' && index === userAnswer,
+                  right: gameStep === 'answer' && index === answerKey,
+                  wrong: gameStep === 'answer' && index === userAnswer && userAnswer !== answerKey,
+                })}
+              >
+                <span dangerouslySetInnerHTML={{ __html: text }} />
+              </button>
+            ))}
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

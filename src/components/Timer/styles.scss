@@ -1,0 +1,31 @@
+.timer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  color: #fff;
+  font-size: 18px;
+  text-align: left;
+  padding: 7px 7px 0 0;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 5px;
+  background-color: #009321;
+  transform-origin: 0 50%;
+  animation: progress 60s linear;
+}
+
+@keyframes progress {
+  from {
+    transform: scale(1, 1);
+  }
+  to {
+    transform: scale(0, 1);
+  }
+}

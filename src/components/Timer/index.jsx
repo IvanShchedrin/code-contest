@@ -1,9 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 
+// Styles
+import styles from './styles.scss';
+
 export const Timer = ({ timeout }) => {
   const timeoutRef = useRef(null);
   const intervalRef = useRef(null);
   const [currentTimeout, setCurrentTimeout] = useState(0);
+  const [initialTimeout, setInitialTimeout] = useState(0);
 
   useEffect(() => {
     const runTimer = () => {
@@ -40,6 +44,7 @@ export const Timer = ({ timeout }) => {
     window.addEventListener('focus', handleFocus, false);
 
     runTimer();
+    setInitialTimeout(new Date(timeout).getTime() - new Date().getTime());
 
     return () => {
       clearTimeout(timeoutRef.current);
@@ -51,10 +56,17 @@ export const Timer = ({ timeout }) => {
   const minutes = Math.floor(currentTimeout / 60);
   const seconds = currentTimeout - minutes * 60;
 
+  if (!minutes && !seconds) {
+    return null;
+  }
+
   return (
-    <span>
-      {minutes || ''}{minutes ? '' : ''}
+    <div className={styles.timer}>
+      <div
+        className={styles.progress}
+        style={{ animationDuration: `${initialTimeout}ms` }}
+      />
       {seconds > 9 ? '' : '0'}{seconds}
-    </span>
+    </div>
   );
 }

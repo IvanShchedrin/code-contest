@@ -2,11 +2,27 @@
 
 :global {
   body {
-    background: #E5E5E5;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: bottom;
   }
-}
 
-.app {
-  background: #E5E5E5;
-  height: 100vh;
+  body.login {
+    background-color: #E5E5E5;
+    background-image: url('static/media/pixel-block.svg');
+  }
+
+  body.game, body.waiting {
+    background-color: #111215;
+    background-image: url('static/media/batman.png'), url('static/media/superman.png');
+    background-position: -55px 100%, calc(100% + 65px) 100%;
+    background-size: 170px;
+  }
+
+  body.results {
+    background-color: #111215;
+    background-image: url('static/media/fly-superman.png');
+    background-size: 270px;
+    background-position: 50% 100%;
+  }
 }

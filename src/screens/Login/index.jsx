@@ -50,7 +50,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
       <h1 className={styles.title}>Frontend quiz!</h1>
       <h3 className={styles.subtitle}>Пройди короткую авторизацию и присоединяйся.<br />Будет интересно 😉</h3>
       <div className={styles.wrap}>
-        <form style={{ marginBottom: '8px' }} className={styles.form} onSubmit={handleSubmit}>
+        <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
           <div className={styles.container}>
             <div className={styles.inputWrap}>
               <label htmlFor="name" className={styles.label}>

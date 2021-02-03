@@ -1,8 +1,6 @@
 .components {
   height: 100%;
   padding: 5%;
-  background: rgba(17, 18, 21, .9) url(static/media/array-white.png) no-repeat 85% 95%;
-  background-size: 15%;
   overflow: hidden;
 }
 
@@ -10,7 +8,6 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 30px;
-  text-align: center;
   color: #E5E5E5;
 
   @media (min-width: 769px) {
@@ -21,16 +18,17 @@
 }
 
 .container {
-  margin: 20px auto 0;
+  margin-top: 20px;
   padding: 20px;
   max-width: 650px;
-  height: 600px;
+  max-height: 400px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 18px;
   overflow-y: scroll;
 
   @media (min-width: 769px) {
     margin-top: 40px;
+    max-height: 500px;
   }
 }
 
@@ -38,6 +36,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  overflow-y: scroll;
 }
 
 .avatar {
