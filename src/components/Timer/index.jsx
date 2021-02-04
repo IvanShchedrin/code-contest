@@ -6,6 +6,7 @@ import styles from './styles.scss';
 export const Timer = ({ timeout }) => {
   const timeoutRef = useRef(null);
   const intervalRef = useRef(null);
+  const [finished, setFinished] = useState(true);
   const [currentTimeout, setCurrentTimeout] = useState(0);
   const [initialTimeout, setInitialTimeout] = useState(0);
 
@@ -15,12 +16,14 @@ export const Timer = ({ timeout }) => {
 
       if (timeoutMS <= 0) {
         setCurrentTimeout(0);
+        setFinished(true);
         return;
       }
 
       let nextTickMS = (timeoutMS - timeoutMS % 1000) / 1000;
 
       setCurrentTimeout(nextTickMS);
+      setFinished(false);
 
       timeoutRef.current = setTimeout(() => {
         intervalRef.current = setInterval(() => {
@@ -31,7 +34,6 @@ export const Timer = ({ timeout }) => {
             clearInterval(intervalRef.current);
           }
         }, 1000);
-
       }, timeout);
     };
 
@@ -56,7 +58,7 @@ export const Timer = ({ timeout }) => {
   const minutes = Math.floor(currentTimeout / 60);
   const seconds = currentTimeout - minutes * 60;
 
-  if (!minutes && !seconds) {
+  if (finished) {
     return null;
   }
 
@@ -66,6 +68,7 @@ export const Timer = ({ timeout }) => {
         className={styles.progress}
         style={{ animationDuration: `${initialTimeout}ms` }}
       />
+      {minutes || ''}{minutes ? '' : ''}
       {seconds > 9 ? '' : '0'}{seconds}
     </div>
   );
