@@ -12,9 +12,9 @@ module.exports = (app, users) => {
     res.end(JSON.stringify(req.userData));
   });
 
-  app.post('/api/signup', (req, res) => {
+  app.post('/api/signup', async (req, res) => {
     const { name, passPhrase } = req.body;
-    const user = users.createUser({ name, passPhrase });
+    const user = await users.createUser({ name, passPhrase });
 
     if (!user) {
       res.sendStatus(400);

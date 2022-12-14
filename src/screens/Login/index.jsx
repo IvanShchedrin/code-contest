@@ -8,13 +8,11 @@ import { initUser } from 'store/user/userSlice';
 import { updateApp } from 'store/app/appSlice';
 import { selectUser } from 'store/user/selectors';
 
-// Styles
 import styles from './styles.scss';
 
 const LoginComponent = ({ initUser, updateApp }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [showPassPhrase, setShowPassPhrase] = useState(false);
 
   const handleAuth = (resp) => {
     initUser(resp.data);
@@ -54,7 +52,7 @@ const LoginComponent = ({ initUser, updateApp }) => {
           <div className={styles.container}>
             <div className={styles.inputWrap}>
               <label htmlFor="name" className={styles.label}>
-                Name
+                Имя и фамилия
               </label>
               <input style={{background: error && 'red'}}
                      className={styles.input}
@@ -64,25 +62,20 @@ const LoginComponent = ({ initUser, updateApp }) => {
                      required id="name"
               />
             </div>
-            {showPassPhrase && (
-                <div className={styles.inputWrap}>
-                  <label for="passphrase" className={styles.label}>
-                    Passphrase
-                  </label>
-                  <input
-                      className={styles.input}
-                      type="text"
-                      name="passphrase"
-                      id="passphrase"
-                  />
-                </div>
-            )}
+            <div className={styles.inputWrap}>
+              <label htmlFor="passphrase" className={styles.label}>
+                Придумай пароль
+              </label>
+              <input
+                  className={styles.input}
+                  type="text"
+                  name="passphrase"
+                  id="passphrase"
+              />
+            </div>
             <Button className={styles.button} htmlType="submit">Поехали!</Button>
           </div>
         </form>
-      {!showPassPhrase && (
-        <Button className={[styles.label, styles.admin]} onClick={() => setShowPassPhrase(!showPassPhrase)}>Зайти как админ</Button>
-      )}
       </div>
     </div>
   );

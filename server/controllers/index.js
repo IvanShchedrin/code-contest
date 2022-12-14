@@ -9,8 +9,8 @@ module.exports = (app, io) => {
   const questions = new Questions();
   const quiz = new Quiz(io, users, questions);
 
-  app.post('/api/*', (req, res, next) => {
-    const user = users.get(req.cookies.user_token);
+  app.post('/api/*', async (req, res, next) => {
+    const user = await users.retrieveUser(req.cookies.user_token);
 
     if (user) {
       user.setConnected(true);

@@ -1,27 +1,36 @@
 const User = require('./user');
+const userModel = require('../db/models/user');
 
 class Users {
   constructor() {
     this.users = {};
   }
 
-  createUser = ({ name, passPhrase }) => {
-    const existedUserId = (
-      Object.keys(this.users).find((id) => this.users[id].name === name)
-    );
+  createUser = async ({ name, passPhrase }) => {
+    const existedUserId = Object.keys(this.users).find((id) => this.users[id].name === name);
     let user = existedUserId ? this.users[existedUserId] : null;
 
     if (user) {
       return user.connected ? false : user;
     }
 
-    user = new User({
-      name,
-      passPhrase,
-      avatarIndex: Object.keys(this.users).length % 18,
-    });
-    this.users[user.id] = user;
+    try {
+      const userDb = await userModel.findOne({ name });
+      if (userDb) {
+        if (userDb.passPhrase === passPhrase) {
+          user = new User(userDb);
+        } else {
+          return false;
+        }
+      } else {
+        user = new User({ name, passPhrase });
+        await user.createDbInstance();
+      }
+    } catch (err) {
+      return false;
+    }
 
+    this.users[user.id] = user;
     return user;
   }
 
@@ -29,9 +38,27 @@ class Users {
     return this.users[id];
   }
 
+  retrieveUser = async (id) => {
+    if (this.users[id]) {
+      return this.users[id];
+    }
+
+    try {
+      const userDb = await userModel.findOne({ id });
+      if (!userDb) return false;
+
+      const user = new User(userDb);
+      this.users[user.id] = user;
+      return user;
+    } catch (err) {
+      console.log(err);
+    }
+
+    return false;
+  }
+
   getUsers = () => {
     return Object.keys(this.users)
-      .filter((id) => this.users[id].connected)
       .map((id) => ({
         id,
         name: this.users[id].name,

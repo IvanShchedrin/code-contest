@@ -1,3 +1,4 @@
+const userModel = require('../db/models/user');
 const uuid = require('uuid/v1');
 const adminKey = require('../adminkey');
 
@@ -10,11 +11,12 @@ class User {
   admin = false
   connected = true
 
-  constructor({ name, avatarIndex, passPhrase }) {
-    this.id = uuid();
+  constructor({ id, name, avatar, passPhrase, admin }) {
+    this.id = id || uuid();
     this.name = name;
-    this.avatar = `/static/icons/bot-${avatarIndex}.png`;
-    this.admin = passPhrase === adminKey;
+    this.avatar = avatar || `/static/icons/bot-${Math.floor(Math.random() * 19)}.png`;
+    this.passPhrase = passPhrase || '';
+    this.admin = admin || passPhrase === adminKey;
   }
 
   setSelectedAnswer = (key) => {
@@ -27,6 +29,18 @@ class User {
 
   setConnected = (value) => {
     this.connected = value;
+  }
+
+  createDbInstance = async () => {
+    const user = new userModel({
+      id: this.id,
+      name: this.name,
+      passPhrase: this.passPhrase,
+      avatar: this.avatar,
+      admin: this.admin,
+    });
+
+    await user.save();
   }
 }
 

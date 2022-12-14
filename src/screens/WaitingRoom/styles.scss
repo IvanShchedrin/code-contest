@@ -35,8 +35,11 @@
 .userWrap {
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
   overflow-y: scroll;
+
+  & + & {
+    margin-top: 40px;
+  }
 }
 
 .avatar {
