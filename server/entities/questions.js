@@ -1,5 +1,7 @@
+// const questionsStub = require('../questionsExample.json');
+
 class Questions {
-  #questions = null
+  #questions = null; // questionsStub
 
   load = (payload) => {
     try {

@@ -1,5 +1,12 @@
 [
   {
+    "type": "instructions",
+    "title": "Перый этап: квиз",
+    "text": "<ul><li>10 вопросов, 4 варианта отвата и только 1 верный</li><li>От 30 до 60 секунд на каждый вопрос</ul></li>"
+  },
+  {
+    "id": "1",
+    "type": "quiz",
     "text": "Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?Кто является автором языка JavaScript?",
     "timeout": 45,
     "key": 1,
@@ -11,6 +18,8 @@
     ]
   },
   {
+    "id": "2",
+    "type": "quiz",
     "text": "Что позволяет сделать CORS?",
     "timeout": 60,
     "key": 0,
@@ -22,6 +31,8 @@
     ]
   },
   {
+    "id": "3",
+    "type": "quiz",
     "text": "Какой JS-объект отвечает за организацию AJAX в браузерах, отличных от IE?",
     "timeout": 45,
     "key": 3,
@@ -33,91 +44,46 @@
     ]
   },
   {
-    "text": "Какой единицы измерения нет в CSS?",
-    "timeout": 45,
-    "key": 3,
-    "options": [
-      "mm",
-      "in",
-      "pc",
-      "cd"
-    ]
+    "saveProgress": true,
+    "type": "instructions",
+    "title": "Второй этап: контест",
+    "text": "<ul><li>3 задания с кодом</li><li>Повтори макет, используя HTML, CSS и JavaScript</li><li>От 10 до 15 минут на каждое задание</li><li>Когда выполнишь задание вставь код в поле ввода и нажми \"Отправить\"</li></ul>",
+    "timeout": 0
   },
   {
-    "text": "Как сделать первый символ каждого слова в предложении в заглавным?",
-    "timeout": 45,
-    "key": 0,
-    "options": [
-      "text-transform: capitalize",
-      "transform: capitalize",
-      "Такой возможности в CSS нет",
-      "text-style: capitalize"
-    ]
+    "id": "11",
+    "type": "contest",
+    "text": "Повтори макет, используя HTML, CSS и JavaScript<br><br><img src=\"static/media/1-tree.png\" style=\"max-width:250px\" />",
+    "timeout": 30
   },
   {
-    "text": "Какое значение по-умолчанию имеет CSS свойство <b>position</b>",
-    "timeout": 45,
-    "key": 1,
-    "options": [
-      "relative",
-      "static",
-      "initial",
-      "unset"
-    ]
+    "id": "12",
+    "type": "contest",
+    "text": "Повтори макет, используя HTML, CSS и JavaScript<br><br><img src=\"static/media/2-planet.gif\" style=\"max-width:250px\" />",
+    "timeout": 900
   },
   {
-    "text": "Какая запись числа покажет SyntaxError в JavaScript?",
-    "timeout": 45,
-    "key": 2,
-    "options": [
-      "4.3",
-      "0x38",
-      "#011",
-      "3e5"
-    ]
+    "id": "13",
+    "type": "contest",
+    "text": "Повтори макет, используя HTML, CSS и JavaScript<br><br><img src=\"static/media/3-button.gif\" style=\"max-width:250px\" />",
+    "timeout": 900
   },
   {
-    "text": "Чему будет равен вызов функции?</br><code>'horses'.replace(/[s]/, 'z')</code>",
-    "timeout": 60,
-    "key": 1,
-    "options": [
-      "undefined",
-      "horzes",
-      "horzez",
-      "horsez"
-    ]
+    "type": "instructions",
+    "title": "Третий этап: креатив",
+    "text": "<ul><li>1 творческое задание</li><li>15 минут на ответ</li><li>Когда выполнишь задание нажми кнопку \"Отправить\"</li></ul>",
+    "timeout": 0
   },
   {
-    "text": "Какое значение будет выведено в консоль?</br><code>var a = [1, 2, 3];</br>var b = [4, 5, 6];</br>Array.prototype.push.apply(a, b);</br>console.log(a);</code>",
-    "timeout": 60,
-    "key": 2,
-    "options": [
-      "[1, 2, 3]",
-      "[4, 5, 6]",
-      "[1, 2, 3, 4, 5, 6]",
-      "[1, 2, 3, [4, 5, 6]]"
-    ]
+    "id": "14",
+    "type": "contest",
+    "text": "",
+    "timeout": 900
   },
   {
-    "text": "Какое значение будет выведено в консоль?</br><code>var count = 0;</br>for (var i = 0; i <= 20; i += 10) {</br>&nbsp;&nbsp;count += i;</br>}</br>console.log(count);</code>",
-    "timeout": 60,
-    "key": 1,
-    "options": [
-      "0",
-      "30",
-      "210",
-      "Infinity"
-    ]
-  },
-  {
-    "text": "Какая директива прекращает выполнение цикла и передаёт управление на строку за его телом?",
-    "timeout": 45,
-    "key": 0,
-    "options": [
-      "break",
-      "continue",
-      "abort",
-      "return"
-    ]
+    "type": "instructions",
+    "title": "На этом всё :)",
+    "text": "",
+    "timeout": 0
   }
 ]

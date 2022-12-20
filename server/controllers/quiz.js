@@ -1,13 +1,44 @@
-module.exports = (app, quiz, questions) => {
-  app.post('/api/apply-answer', (req, res) => {
-    const { key } = req.body;
-    const gameStep = quiz.getGameStep();
+const AnswerModel = require('../db/models/answer');
 
-    if (req.userData && gameStep === 'question') {
+module.exports = (app, quiz, questions) => {
+  app.post('/api/apply-answer', async (req, res) => {
+    const { key, text } = req.body;
+    const gameStep = quiz.getGameStep();
+    const question = quiz.getQuestion();
+
+    if (!req.userData || gameStep !== 'question') {
+      res.sendStatus(401);
+      res.end();
+      return;
+    }
+
+    if (question.type !== 'contest') {
       req.userData.setSelectedAnswer(key);
-    } else {
+      res.end();
+      return;
+    }
+
+    try {
+      const currentAnswer = await AnswerModel.findOne({
+        userId: req.userData.id,
+        questionId: question.id,
+      });
+
+      if (currentAnswer) {
+        currentAnswer.key = text;
+        await currentAnswer.save();
+      } else {
+        const answer = new AnswerModel({
+          userId: req.userData.id,
+          questionId: question.id,
+          key: text,
+        });
+        await answer.save();
+      }
+    } catch (err) {
       res.sendStatus(401);
     }
+
     res.end();
   });
 

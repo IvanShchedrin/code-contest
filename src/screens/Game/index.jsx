@@ -8,8 +8,6 @@ import { Timer } from 'components/Timer';
 
 import { setUserAnswer } from 'store/app/appSlice';
 import { selectGameStep, selectQuestion, selectUserAnswer, selectKey, selectTimeout } from 'store/app/selectors';
-
-// Styles
 import styles from './styles.scss';
 const cx = classnames.bind(styles);
 
@@ -23,20 +21,29 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
       });
   };
 
+  const handleCodeSubmit = (event) => {
+    event.preventDefault();
+
+    const text = event.target.textAnswer.value;
+
+    if (!text) {
+      return;
+    }
+
+    axios.post('/api/apply-answer', { text })
+      .then(() => {
+        setUserAnswer(true);
+        event.target.textAnswer.value = '';
+      })
+      .catch(() => {
+        alert('Упс, что-то пошло не так и ответ не сохранился. Попробуй еще раз')
+      });
+  };
+
   useEffect(() => {
     if (typeof userAnswer === 'number' && typeof answerKey === 'number' && userAnswer === answerKey) {
-      confetti({
-        particleCount: 80,
-        spread: 80,
-        origin: { y: 0.8, x: 0 },
-        angle: 70
-      });
-      confetti({
-        particleCount: 80,
-        spread: 80,
-        origin: { y: 0.8, x: 1 },
-        angle: 110
-      });
+      confetti({ particleCount: 80, spread: 80, origin: { y: 0.8, x: 0 }, angle: 70 });
+      confetti({ particleCount: 80, spread: 80, origin: { y: 0.8, x: 1 }, angle: 110 });
     }
   }, [userAnswer, answerKey]);
 
@@ -48,21 +55,50 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
 
       {question && (
         <div className={styles.components}>
-          <p dangerouslySetInnerHTML={{ __html: question.text }} className={styles.questionText}/>
+          {question.title && (
+            <h2 dangerouslySetInnerHTML={{ __html: question.title }} className={styles.title} />
+          )}
+          {question.text && (
+            <div dangerouslySetInnerHTML={{ __html: question.text }} className={styles.questionText} />
+          )}
           <div className={styles.wrap}>
-            {question.options.map((text, index) => (
-              <button
-                onClick={() => handleAnswerSelect(index)}
-                key={text}
-                className={cx('button', {
-                  selected: gameStep === 'question' && index === userAnswer,
-                  right: gameStep === 'answer' && index === answerKey,
-                  wrong: gameStep === 'answer' && index === userAnswer && userAnswer !== answerKey,
-                })}
-              >
-                <span dangerouslySetInnerHTML={{ __html: text }} />
-              </button>
-            ))}
+            {question.type === 'quiz' && (
+              question.options.map((text, index) => (
+                <button
+                  onClick={() => handleAnswerSelect(index)}
+                  key={text}
+                  className={cx('button', {
+                    selected: gameStep === 'question' && index === userAnswer,
+                    right: gameStep === 'answer' && index === answerKey,
+                    wrong: gameStep === 'answer' && index === userAnswer && userAnswer !== answerKey,
+                  })}
+                >
+                  <span dangerouslySetInnerHTML={{ __html: text }} />
+                </button>
+              ))
+            )}
+            {question.type === 'contest' && (
+              <form onSubmit={handleCodeSubmit} className={styles.form}>
+                {gameStep !== 'answer' && (
+                  <>
+                    <label className={styles.textareaLabel}>
+                      Вставь сюда готовый ответ и нажми "Отправить"
+                    </label>
+                    <textarea name="textAnswer" id="textAnswer" className={styles.textarea} />
+                    <button
+                      type="submit"
+                      className={styles.submitButton}
+                      disabled={gameStep === 'answer'}
+                    >
+                      Отправить
+                    </button>
+                  </>
+                )}
+                {userAnswer && (
+                  <div className={styles.submitStatus}>Ответ принят</div>
+                )}
+              </form>
+            )}
           </div>
         </div>
       )}

@@ -68,7 +68,7 @@ export const Timer = ({ timeout }) => {
         className={styles.progress}
         style={{ animationDuration: `${initialTimeout}ms` }}
       />
-      {minutes || ''}{minutes ? '' : ''}
+      {minutes || ''}{minutes ? ':' : ''}
       {seconds > 9 ? '' : '0'}{seconds}
     </div>
   );

@@ -5,18 +5,21 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position-y: bottom;
+    color: #000;
   }
 
   body.login {
     background-color: #E5E5E5;
-    background-image: url('static/media/pixel-block.svg');
+    background-image: url('static/media/desktop.png');
+    background-position: center center;
+    background-size: cover;
   }
 
   body.game, body.waiting {
-    background-color: #111215;
-    background-image: url('static/media/batman.png'), url('static/media/superman.png');
-    background-position: -55px 100%, calc(100% + 65px) 100%;
-    background-size: 170px;
+    background-image: url('static/media/batman.png'), url('static/media/superman.png'), url('static/media/desktop-plain.png');
+    background-position: -55px 100%, calc(100% + 65px) 100%, center center;
+    background-size: 170px, 170px, contain;
+    background-repeat: no-repeat, no-repeat, repeat;
   }
 
   body.results {

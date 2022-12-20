@@ -1,6 +1,5 @@
 const userModel = require('../db/models/user');
 const uuid = require('uuid/v1');
-const adminKey = require('../adminkey');
 
 class User {
   id = null
@@ -16,7 +15,7 @@ class User {
     this.name = name;
     this.avatar = avatar || `/static/icons/bot-${Math.floor(Math.random() * 19)}.png`;
     this.passPhrase = passPhrase || '';
-    this.admin = admin || passPhrase === adminKey;
+    this.admin = admin;
   }
 
   setSelectedAnswer = (key) => {

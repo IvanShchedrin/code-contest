@@ -1,4 +1,5 @@
 const cookieParse = require('cookie').parse;
+const UserModel = require('../db/models/user');
 
 class Quiz {
   #io = null
@@ -41,7 +42,7 @@ class Quiz {
   }
 
   #sendState = (payload = {}, socket) => {
-    const currentQuestion = this.#getQuestion();
+    const currentQuestion = this.getQuestion();
     const { key, ...question } = currentQuestion || {};
 
     (socket || this.#io).emit('set_state', {
@@ -60,8 +61,12 @@ class Quiz {
     });
   }
 
-  #getQuestion() {
+  getQuestion() {
     return this.#questions.get(this.#questionIndex);
+  }
+
+  getNextQuestion() {
+    return this.#questions.get(this.#questionIndex + 1);
   }
 
   reset = () => {
@@ -77,37 +82,50 @@ class Quiz {
     });
   }
 
-  nextQuestion = () => {
+  nextQuestion = async () => {
     clearTimeout(this.#timeoutId);
+    const question = this.getNextQuestion();
+
+    if (!question) return;
 
     this.#questionIndex = this.#questionIndex + 1;
     this.#key = null;
-
-    const question = this.#getQuestion();
+    this.#timeout = null;
+    this.#timeoutId = null;
 
     if (!question) {
       this.finishGame();
       return;
     }
 
-    this.#timeoutId = setTimeout(this.finishQuestion, question.timeout * 1000);
-    this.#timeout = new Date(new Date().getTime() + question.timeout * 1000);
+    if (question.timeout) {
+      this.#timeoutId = setTimeout(this.finishQuestion, question.timeout * 1000);
+      this.#timeout = new Date(new Date().getTime() + question.timeout * 1000);
+    }
+
     this.#step = 'game';
     this.#gameStep = 'question';
 
     this.#sendState({
       userAnswer: null,
     });
+
+    if (question.saveProgress) {
+      await this.#saveScoreDb();
+    }
   }
 
   finishQuestion = () => {
-    const key = this.#getQuestion().key;
+    const { key, type } = this.getQuestion() || {};
 
     clearTimeout(this.#timeoutId);
 
-    this.#key = key;
+    if (type === 'quiz') {
+      this.#key = key;
+      this.#users.applyAnswers(key);
+    }
+
     this.#gameStep = 'answer';
-    this.#users.applyAnswers(key);
     this.#io.emit('answer', key);
   }
 
@@ -121,6 +139,19 @@ class Quiz {
 
   getGameStep = () => {
     return this.#gameStep;
+  }
+
+  #saveScoreDb = async () => {
+    const users = this.#users.getScore();
+
+    for (let i = 0; i < users.length; i++) {
+      try {
+        await UserModel.findOneAndUpdate({ id: users[i].id }, { score: users[i].score || 0 });
+        console.log(`User ${users[i].name} with score ${users[i].score} updated`);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 }
 

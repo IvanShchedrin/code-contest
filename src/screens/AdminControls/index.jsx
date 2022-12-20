@@ -29,7 +29,6 @@ export const AdminControlsComponent = ({ step, gameStep }) => {
 
   return (
     <div className={styles.components}>
-      <p className={styles.adminText}>Admin panel below</p>
       <div className={styles.wrap}>
         {step === 'waiting' && (
             <form onSubmit={handleQuestionsSubmit} className={styles.form}>

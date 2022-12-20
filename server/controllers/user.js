@@ -8,8 +8,10 @@ module.exports = (app, users) => {
       return res.end();
     }
 
+    const { passPhrase, ...user } = req.userData;
+
     res.cookie('user_token', req.userData.id, { maxAge: yearMs, httpOnly: true });
-    res.end(JSON.stringify(req.userData));
+    res.end(JSON.stringify(user));
   });
 
   app.post('/api/signup', async (req, res) => {
@@ -21,8 +23,10 @@ module.exports = (app, users) => {
       return res.end();
     }
 
+    const { passPhrase: _, ...userWithoutPassPhrase } = user;
+
     res.cookie('user_token', user.id, { maxAge: yearMs, httpOnly: true });
-    res.end(JSON.stringify(user));
+    res.end(JSON.stringify(userWithoutPassPhrase));
   });
 
   return users;

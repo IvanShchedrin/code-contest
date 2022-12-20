@@ -30,8 +30,8 @@ const LoginComponent = ({ initUser, updateApp }) => {
     event.preventDefault();
 
     axios.post('/api/signup', {
-      name: event.currentTarget.name.value,
-      passPhrase: event.currentTarget.passphrase?.value,
+      name: event.currentTarget.quiz_name.value,
+      passPhrase: event.currentTarget.quiz_passphrase.value,
     })
       .then(handleAuth)
       .catch(() => {
@@ -39,38 +39,34 @@ const LoginComponent = ({ initUser, updateApp }) => {
       })
   };
 
-  return loading ? (
-    <>
-      Loading...
-    </>
-  ) : (
+  return loading ? null : (
     <div className={styles.login}>
-      <h1 className={styles.title}>Frontend quiz!</h1>
-      <h3 className={styles.subtitle}>Пройди короткую авторизацию и присоединяйся.<br />Будет интересно 😉</h3>
+      <h1 className={styles.title}>Frontend ёлка</h1>
+      <h3 className={styles.subtitle}>Пройди короткую авторизацию и присоединяйся<br />Будет интересно 😉</h3>
       <div className={styles.wrap}>
         <form style={{ marginBottom: '8px' }} onSubmit={handleSubmit}>
           <div className={styles.container}>
             <div className={styles.inputWrap}>
-              <label htmlFor="name" className={styles.label}>
+              <label htmlFor="quiz_name" className={styles.label}>
                 Имя и фамилия
               </label>
               <input style={{background: error && 'red'}}
                      className={styles.input}
                      type="text"
-                     name="name"
-                     maxLength="20"
-                     required id="name"
+                     name="quiz_name"
+                     maxLength="100"
+                     required id="quiz_name"
               />
             </div>
             <div className={styles.inputWrap}>
-              <label htmlFor="passphrase" className={styles.label}>
+              <label htmlFor="quiz_passphrase" className={styles.label}>
                 Придумай пароль
               </label>
               <input
                   className={styles.input}
-                  type="text"
-                  name="passphrase"
-                  id="passphrase"
+                  type="password"
+                  name="quiz_passphrase"
+                  id="quiz_passphrase"
               />
             </div>
             <Button className={styles.button} htmlType="submit">Поехали!</Button>

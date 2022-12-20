@@ -11,7 +11,7 @@ class Users {
     let user = existedUserId ? this.users[existedUserId] : null;
 
     if (user) {
-      return user.connected ? false : user;
+      return user.connected || user.passPhrase !== passPhrase ? false : user;
     }
 
     try {
@@ -59,6 +59,7 @@ class Users {
 
   getUsers = () => {
     return Object.keys(this.users)
+      .filter((id) => !this.users[id].admin)
       .map((id) => ({
         id,
         name: this.users[id].name,
@@ -73,8 +74,7 @@ class Users {
         name: this.users[id].name,
         score: this.users[id].score,
         avatar: this.users[id].avatar,
-      }))
-      .filter((user) => user.score > 0);
+      }));
   }
 
   applyAnswers = (key) => {

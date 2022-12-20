@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  score: {
+    type: Number,
+  },
   admin: {
     type: Boolean,
   },
