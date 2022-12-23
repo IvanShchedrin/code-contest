@@ -15,6 +15,7 @@
   font-size: 42px;
   line-height: 40px;
   text-align: center;
+  text-shadow: -1px -2px 2px #ffffff;
 
   @media (min-width: 769px) {
     font-weight: 700;
@@ -25,7 +26,9 @@
 
 .subtitle {
   text-align: center;
-  font-weight: 300;
+  font-weight: 600;
+  font-size: 20px;
+  text-shadow: -1px -1px 2px #ffffff;
   margin-bottom: 15px;
 }
 

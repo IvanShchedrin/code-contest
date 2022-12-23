@@ -33,7 +33,6 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
     axios.post('/api/apply-answer', { text })
       .then(() => {
         setUserAnswer(true);
-        event.target.textAnswer.value = '';
       })
       .catch(() => {
         alert('Упс, что-то пошло не так и ответ не сохранился. Попробуй еще раз')

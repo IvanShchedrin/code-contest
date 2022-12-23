@@ -16,9 +16,9 @@
   }
 
   body.game, body.waiting {
-    background-image: url('static/media/batman.png'), url('static/media/superman.png'), url('static/media/desktop-plain.png');
-    background-position: -55px 100%, calc(100% + 65px) 100%, center center;
-    background-size: 170px, 170px, contain;
+    background-image: url('static/media/bazya.png'), url('static/media/push.png'), url('static/media/desktop-plain.png');
+    background-position: 0 100%, 100% 100%, center center;
+    background-size: 170px, 170px, auto 100%;
     background-repeat: no-repeat, no-repeat, repeat;
   }
 
