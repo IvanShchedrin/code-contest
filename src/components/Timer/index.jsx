@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-// Styles
 import styles from './styles.scss';
 
 export const Timer = ({ timeout }) => {
@@ -30,7 +29,7 @@ export const Timer = ({ timeout }) => {
           nextTickMS -= 1;
           setCurrentTimeout(nextTickMS);
 
-          if (nextTickMS <= 0) {
+          if (nextTickMS < 0) {
             clearInterval(intervalRef.current);
           }
         }, 1000);
@@ -55,12 +54,12 @@ export const Timer = ({ timeout }) => {
     };
   }, [timeout]);
 
-  const minutes = Math.floor(currentTimeout / 60);
-  const seconds = currentTimeout - minutes * 60;
-
-  if (finished) {
+  if (finished || currentTimeout < 0) {
     return null;
   }
+
+  const minutes = Math.floor(currentTimeout / 60);
+  const seconds = currentTimeout - minutes * 60;
 
   return (
     <div className={styles.timer}>

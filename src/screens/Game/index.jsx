@@ -21,6 +21,12 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
       });
   };
 
+  const handleCodeChange = () => {
+    if (userAnswer) {
+      setUserAnswer(null);
+    }
+  };
+
   const handleCodeSubmit = (event) => {
     event.preventDefault();
 
@@ -83,14 +89,21 @@ export const GameComponent = ({ gameStep, question, timeout, userAnswer, answerK
                     <label className={styles.textareaLabel}>
                       Вставь сюда готовый ответ и нажми "Отправить"
                     </label>
-                    <textarea name="textAnswer" id="textAnswer" className={styles.textarea} />
-                    <button
-                      type="submit"
-                      className={styles.submitButton}
-                      disabled={gameStep === 'answer'}
-                    >
-                      Отправить
-                    </button>
+                    <textarea
+                      onChange={handleCodeChange}
+                      name="textAnswer"
+                      id="textAnswer"
+                      className={styles.textarea}
+                    />
+                    {!userAnswer && (
+                      <button
+                        type="submit"
+                        className={styles.submitButton}
+                        disabled={gameStep === 'answer'}
+                      >
+                        Отправить
+                      </button>
+                    )}
                   </>
                 )}
                 {userAnswer && (

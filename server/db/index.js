@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const initDB = () => {
+const initDB = (onOpen) => {
   mongoose.connect('mongodb://localhost:27017/usersdb', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -10,6 +10,9 @@ const initDB = () => {
   db.on('error', console.error.bind(console, 'connection error: '));
   db.once('open', function () {
     console.log('mongodb connected successfully');
+    if (onOpen) {
+      onOpen();
+    }
   });
 };
 
